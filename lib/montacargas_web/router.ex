@@ -20,8 +20,12 @@ defmodule MontaCargasWeb.Router do
     get("/", PageController, :index)
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", MontaCargasWeb do
-  #   pipe_through :api
-  # end
+  scope "/auth", MontaCargasWeb do
+    pipe_through([:browser])
+
+    get("/:provider", AuthController, :request)
+    get("/:provider/callback", AuthController, :callback)
+    post("/:provider/callback", AuthController, :callback)
+    delete("/logout", AuthController, :delete)
+  end
 end
