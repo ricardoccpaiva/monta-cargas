@@ -20,6 +20,8 @@ defmodule MontaCargasWeb do
   def controller do
     quote do
       use Phoenix.Controller, namespace: MontaCargasWeb
+      # use Guardian.Phoenix.Controller
+      # alias Guardian.Plug.EnsureAuthenticated
       import Plug.Conn
       import MontaCargasWeb.Router.Helpers
       import MontaCargasWeb.Gettext
