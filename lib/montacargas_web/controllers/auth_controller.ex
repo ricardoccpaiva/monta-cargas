@@ -31,9 +31,10 @@ defmodule MontaCargasWeb.AuthController do
     case Models.UserFromAuth.find_or_create(auth) do
       {:ok, user} ->
         conn
-        |> put_flash(:info, "Successfully authenticated.")
+        |> put_flash(:info, "Signed in as #{user.name}")
+        |> MontaCargasWeb.Guardian.Plug.sign_in(user)
         |> put_session(:current_user, user)
-        |> redirect(to: "/")
+        |> redirect(to: page_path(conn, :index))
 
       {:error, reason} ->
         conn

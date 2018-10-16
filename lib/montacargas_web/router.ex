@@ -1,6 +1,21 @@
 defmodule MontaCargasWeb.Router do
   use MontaCargasWeb, :router
 
+  pipeline :unauthorized do
+    plug(:fetch_session)
+  end
+
+  pipeline :authorized do
+    plug(:fetch_session)
+
+    plug(Guardian.Plug.Pipeline,
+      module: MontaCargasWeb.Guardian,
+      error_handler: MontaCargasWeb.Guardian.ErrorHandler
+    )
+
+    plug(Guardian.Plug.EnsureAuthenticated)
+  end
+
   pipeline :browser do
     plug(:accepts, ["html"])
     plug(:fetch_session)
@@ -16,12 +31,14 @@ defmodule MontaCargasWeb.Router do
   scope "/", MontaCargasWeb do
     # Use the default browser stack
     pipe_through(:browser)
+    pipe_through(:authorized)
 
     get("/", PageController, :index)
   end
 
   scope "/auth", MontaCargasWeb do
     pipe_through([:browser])
+    pipe_through(:unauthorized)
 
     get("/:provider", AuthController, :request)
     get("/:provider/callback", AuthController, :callback)
