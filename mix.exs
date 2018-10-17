@@ -43,7 +43,8 @@ defmodule MontaCargas.Mixfile do
       {:cowboy, "~> 1.0"},
       {:ueberauth, "~> 0.4"},
       {:ueberauth_google, "~> 0.5"},
-      {:guardian, "~> 1.0"}
+      {:guardian, "~> 1.0"},
+      {:scout_apm, "~> 0.0"}
     ]
   end
 

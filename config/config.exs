@@ -4,10 +4,13 @@
 # This configuration file is loaded before any dependency and
 # is restricted to this project.
 use Mix.Config
+import_config "scout_apm.exs"
 
 # General application configuration
 config :montacargas,
-  ecto_repos: [MontaCargas.Repo]
+  ecto_repos: [MontaCargas.Repo],
+  loggers: [{Ecto.LogEntry, :log, []},
+            {ScoutApm.Instruments.EctoLogger, :log, []}]
 
 # Configures the endpoint
 config :montacargas, MontaCargasWeb.Endpoint,
