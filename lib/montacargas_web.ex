@@ -20,6 +20,7 @@ defmodule MontaCargasWeb do
   def controller do
     quote do
       use Phoenix.Controller, namespace: MontaCargasWeb
+      use ScoutApm.Instrumentation
       # use Guardian.Phoenix.Controller
       # alias Guardian.Plug.EnsureAuthenticated
       import Plug.Conn
