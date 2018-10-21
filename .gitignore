@@ -3,7 +3,7 @@
 /db
 /deps
 /*.ez
-
+/test_plans
 # Generated on crash by the VM
 erl_crash.dump
 

@@ -1,4 +1,18 @@
-    <a class="btn btn-primary btn-danger" href="/auth/google">
-      <i class="fa fa-google"></i>
-      Sign in with Google
-    </a>
+<div class="page">
+  <div class="page-single">
+    <div class="container">
+      <div class="row">
+        <div class="col col-login mx-auto">
+          <form class="card" action="" method="post">
+            <div class="card-body p-6">
+              <div class="card-title">Login to your account</div>
+              <div class="form-footer">
+                <a class="btn btn-block btn-danger" href="/auth/google">Sign in with Google</a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

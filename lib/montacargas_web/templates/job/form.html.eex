@@ -1,0 +1,63 @@
+<%= form_for @changeset, @action, [class: "card", multipart: true], fn f -> %>
+<%= if @changeset.action do %>
+<div class="alert alert-danger">
+  <p>Oops, something went wrong! Please check the errors below.</p>
+</div>
+<% end %>
+<div class="card-header">
+  <h3 class="card-title">New Job</h3>
+</div>
+<div class="card-body">
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <%= label f, :name, class: "control-label" %>
+        <%= text_input f, :name, class: "form-control" %>
+        <%= error_tag f, :name %>
+      </div>
+      <div class="form-group">
+        <%= label f, :description, class: "control-label" %>
+        <%= text_input f, :description, class: "form-control" %>
+        <%= error_tag f, :description %>
+      </div>
+      <div class="form-group">
+        <label>Test plan</label>
+        <%= if @job.test_plan do %>
+        <%= text_input f, :test_plan, class: "form-control" %>
+        <% else %>
+        <%= file_input f, :test_plan_file, class: "form-control" %>
+        <%= error_tag f, :test_plan_file %>
+        <% end %>
+      </div>
+      <div class="form-group">
+        <%= label f, :status, class: "control-label" %>
+        <%= text_input f, :status, class: "form-control", disabled: true %>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <%= label f, :inserted_at, class: "control-label" %>
+        <%= text_input f, :inserted_at, class: "form-control", disabled: true  %>
+      </div>
+      <div class="form-group">
+        <%= label f, :inserted_by, class: "control-label" %>
+        <%= text_input f, :inserted_by, class: "form-control", disabled: true  %>
+      </div>
+      <div class="form-group">
+        <%= label f, :updated_at, class: "control-label" %>
+        <%= text_input f, :updated_at, class: "form-control", disabled: true  %>
+      </div>
+      <div class="form-group">
+        <%= label f, :updated_by, class: "control-label" %>
+        <%= text_input f, :updated_by, class: "form-control", disabled: true  %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card-footer text-right">
+  <div class="d-flex">
+    <a href="javascript:void(0)" class="btn btn-link">Cancel</a>
+    <%= submit "Save", class: "btn btn-primary ml-auto" %>
+  </div>
+</div>
+<% end %>

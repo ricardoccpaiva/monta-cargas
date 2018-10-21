@@ -47,4 +47,15 @@ defmodule MontaCargasWeb.Router do
     post("/:provider/callback", AuthController, :callback)
     delete("/logout", AuthController, :delete)
   end
+
+  scope "/jobs", MontaCargasWeb do
+    pipe_through([:browser, :auth, :ensure_auth])
+
+    get("/", JobController, :index)
+    post("/", JobController, :create)
+    get("/new", JobController, :new)
+    get("/:id", JobController, :edit)
+    delete("/:id", JobController, :delete)
+    put("/:id/", JobController, :update)
+  end
 end

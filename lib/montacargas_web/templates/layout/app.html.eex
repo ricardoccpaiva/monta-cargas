@@ -1,27 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
 
-    <title>Hello MontaCargas!</title>
-    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
-  </head>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Hello MontaCargas!</title>
+  <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+  <link rel="stylesheet" href="<%= static_path(@conn, "/css/font-awesome.min.css") %>">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
+  <link rel="stylesheet" href="<%= static_path(@conn, "/css/tabler-ui.css") %>">
+  <script src="<%= static_path(@conn, "/js/app.js") %>
+  ">
+  </script>
+</head>
 
-  <body>
-    <div class="container">
+<body class="">
+  <div class="page">
+    <div class="page-main">
+      <div class="header py-4">
+        <div class="container">
+          <div class="d-flex">
+            <a class="header-brand" href="./">
+                <img src="<%= static_path(@conn, "/images/forklift.png") %>" class="header-brand-img" alt="Monta Cargas">
+                Monta Cargas
+              </a>
+            <div class="d-flex order-lg-2 ml-auto">
+              <div class="dropdown">
+                <a href="#" class="nav-link pr-0 leading-none" data-toggle="dropdown">
+                    <span class="avatar" style="background-image: url(<%= @current_user.avatar %>)"></span>
+                    <span class="ml-2 d-none d-lg-block">
+                      <span class="text-default"><%= @current_user.name %></span>
+                    </span>
+                  </a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                  <a class="dropdown-item" href="#">
+                      <i class="dropdown-icon fe fe-user"></i> Profile
+                    </a>
+                  <div class="dropdown-divider"></div>
+                  <%= link to: auth_path(@conn, :delete), method: :delete, class: "dropdown-item" do %>
+                  <i class="dropdown-icon fe fe-log-out"></i> Sign out
+                  <% end %>
+                </div>
+              </div>
+            </div>
+            <a href="#" class="header-toggler d-lg-none ml-3 ml-lg-0" data-toggle="collapse" data-target="#headerMenuCollapse">
+                <span class="header-toggler-icon"></span>
+              </a>
+          </div>
+        </div>
+      </div>
+      <div class="header collapse d-lg-flex p-0" id="headerMenuCollapse">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-lg-3 ml-auto">
+            </div>
+            <div class="col-lg order-lg-first">
+              <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
+                <li class="nav-item">
+                  <a href="/" class="nav-link"><i class="fe fe-home"></i> Home</a>
+                </li>
+                <li class="nav-item">
+                  <a href="jobs" class="nav-link"><i class="fe fe-activity"></i> Jobs</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="my-3 my-md-5">
+          <div class="container">
+              <%= render @view_module, @view_template, assigns %>
+          </div>
+        </div>
+    </div>
+  </div>
+</body>
 
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-
-      <main role="main">
-        <%= render @view_module, @view_template, assigns %>
-      </main>
-
-    </div> <!-- /container -->
-    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
-  </body>
 </html>
