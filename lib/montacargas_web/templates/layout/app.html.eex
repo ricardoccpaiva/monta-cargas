@@ -60,16 +60,21 @@
             <div class="col-lg order-lg-first">
               <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
                 <li class="nav-item">
-                  <a href="./index.html" class="nav-link"><i class="fe fe-home"></i> Home</a>
+                  <a href="/" class="nav-link"><i class="fe fe-home"></i> Home</a>
                 </li>
                 <li class="nav-item">
-                  <a href="./index.html" class="nav-link"><i class="fe fe-activity"></i> Jobs</a>
+                  <a href="jobs" class="nav-link"><i class="fe fe-activity"></i> Jobs</a>
                 </li>
               </ul>
             </div>
           </div>
         </div>
       </div>
+      <div class="my-3 my-md-5">
+          <div class="container">
+              <%= render @view_module, @view_template, assigns %>
+          </div>
+        </div>
     </div>
   </div>
 </body>
