@@ -44,7 +44,8 @@ defmodule MontaCargas.Mixfile do
       {:ueberauth, "~> 0.4"},
       {:ueberauth_google, "~> 0.5"},
       {:guardian, "~> 1.0"},
-      {:scout_apm, "~> 0.0"}
+      {:scout_apm, "~> 0.0"},
+      {:elixir_uuid, "~> 1.2"}
     ]
   end
 
