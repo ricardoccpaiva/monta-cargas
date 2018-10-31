@@ -22,7 +22,7 @@
       </div>
       <div class="form-group">
         <label>Test plan</label>
-        <%= if @job.test_plan do %>
+        <%= if @job && @job.test_plan do %>
         <%= text_input f, :test_plan, class: "form-control" %>
         <% else %>
         <%= file_input f, :test_plan_file, class: "form-control" %>

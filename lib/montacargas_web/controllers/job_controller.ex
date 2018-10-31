@@ -12,7 +12,12 @@ defmodule MontaCargasWeb.JobController do
 
   def new(conn, _params) do
     changeset = Jobs.change_job(%Job{})
-    render(conn, "new.html", changeset: changeset, current_user: get_session(conn, :current_user))
+
+    render(conn, "new.html",
+      changeset: changeset,
+      current_user: get_session(conn, :current_user),
+      job: nil
+    )
   end
 
   def create(conn, %{"job" => job_params}) do
@@ -37,7 +42,8 @@ defmodule MontaCargasWeb.JobController do
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html",
           changeset: changeset,
-          current_user: get_session(conn, :current_user)
+          current_user: get_session(conn, :current_user),
+          job: nil
         )
     end
   end
