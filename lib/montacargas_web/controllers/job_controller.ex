@@ -23,12 +23,9 @@ defmodule MontaCargasWeb.JobController do
   def create(conn, %{"job" => job_params}) do
     IO.inspect("JOB PARAMS---------> #{inspect(job_params)}")
 
-    if upload = job_params["test_plan_file"] do
-      job_params = Map.put(job_params, "test_plan", UUID.uuid4())
-      IO.inspect("UPDATED JOB PARAMS---------> #{inspect(job_params)}")
-    end
+    test_plan_uuid = if job_params["test_plan_file"] != nil, do: UUID.uuid4(), else: ""
 
-    case Jobs.create_job(job_params) do
+    case Jobs.create_job(Map.put(job_params, "test_plan", test_plan_uuid)) do
       {:ok, job} ->
         if upload = job_params["test_plan_file"] do
           extension = Path.extname(upload.filename)
