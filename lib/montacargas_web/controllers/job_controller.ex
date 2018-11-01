@@ -6,7 +6,6 @@ defmodule MontaCargasWeb.JobController do
 
   def index(conn, _params) do
     jobs = Jobs.list_jobs()
-    IO.inspect("---------> #{inspect(jobs)}")
     render(conn, "index.html", jobs: jobs, current_user: get_session(conn, :current_user))
   end
 
@@ -21,8 +20,6 @@ defmodule MontaCargasWeb.JobController do
   end
 
   def create(conn, %{"job" => job_params}) do
-    IO.inspect("JOB PARAMS---------> #{inspect(job_params)}")
-
     test_plan_uuid = if job_params["test_plan_file"] != nil, do: UUID.uuid4(), else: ""
 
     case Jobs.create_job(Map.put(job_params, "test_plan", test_plan_uuid)) do
@@ -66,20 +63,10 @@ defmodule MontaCargasWeb.JobController do
   end
 
   def update(conn, %{"id" => id, "job" => job_params}) do
-    if upload = job_params["test_plan_file"] do
-      job_params = Map.put(job_params, "test_plan", UUID.uuid4())
-      IO.inspect("UPDATED JOB PARAMS---------> #{inspect(job_params)}")
-    end
-
     job = Jobs.get_job!(id)
 
     case Jobs.update_job(job, job_params) do
       {:ok, job} ->
-        if upload = job_params["test_plan_file"] do
-          extension = Path.extname(upload.filename)
-          File.cp(upload.path, "#{System.cwd()}/test_plans/#{job.test_plan}#{extension}")
-        end
-
         conn
         |> put_flash(:info, "Job updated successfully.")
         |> redirect(to: job_path(conn, :index))
