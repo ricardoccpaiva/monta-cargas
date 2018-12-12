@@ -29,6 +29,8 @@ defmodule MontaCargasWeb.JobController do
           File.cp(upload.path, "#{System.cwd()}/test_plans/#{job.test_plan}#{extension}")
         end
 
+        {:ok, jid} = Exq.enqueue(Exq, "default", MyWorker, [])
+
         conn
         |> put_flash(:info, "Job created successfully.")
         |> redirect(to: job_path(conn, :index))
@@ -64,6 +66,7 @@ defmodule MontaCargasWeb.JobController do
 
   def update(conn, %{"id" => id, "job" => job_params}) do
     job = Jobs.get_job!(id)
+    MyWorker.perform()
 
     case Jobs.update_job(job, job_params) do
       {:ok, job} ->

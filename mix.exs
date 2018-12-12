@@ -20,7 +20,7 @@ defmodule MontaCargas.Mixfile do
   def application do
     [
       mod: {MontaCargas.Application, []},
-      extra_applications: [:logger, :ueberauth_google, :runtime_tools]
+      extra_applications: [:logger, :ueberauth_google, :runtime_tools, :porcelain]
     ]
   end
 
@@ -45,7 +45,8 @@ defmodule MontaCargas.Mixfile do
       {:ueberauth_google, "~> 0.5"},
       {:guardian, "~> 1.0"},
       {:scout_apm, "~> 0.0"},
-      {:elixir_uuid, "~> 1.2"}
+      {:elixir_uuid, "~> 1.2"},
+      {:porcelain, "~> 2.0"}
     ]
   end
 
